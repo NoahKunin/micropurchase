@@ -44,7 +44,15 @@ class BidStatusPresenter::Base
     Url.new(link_text: 'sign up', path_name: 'sign_up')
   end
 
-  def winning_amount
-    Currency.new(WinningBid.new(auction).find.amount)
+  def winning_bid_amount
+    Currency.new(winning_bid.amount)
+  end
+
+  def winning_bid_time
+    DcTimePresenter.convert_and_format(winning_bid.created_at)
+  end
+
+  def winning_bid
+    WinningBid.new(auction).find
   end
 end

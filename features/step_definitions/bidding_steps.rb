@@ -29,7 +29,7 @@ When(/^I have not placed a bid$/) do
 end
 
 Then(/^I should see the auction had a winning bid$/) do
-  winning_bid_amount = Currency.new(WinningBid.new(@auction).find.amount).to_s
+  winning_bid_amount = Currency.new(winning_bid.amount).to_s
   expect(page).to have_content("Winning bid: #{winning_bid_amount}")
   expect(page).not_to have_content("Current bid:")
 end
@@ -53,7 +53,7 @@ When(/^the winning bidder has a valid DUNS number$/) do
 end
 
 Then(/^I should see the winning bid for the auction$/) do
-  bid = WinningBid.new(@auction).find
+  bid = winning_bid
   bid_amount = Currency.new(bid.amount).to_s
   expect(page).to have_text(bid_amount)
 end
@@ -72,7 +72,18 @@ Then(/^I should see the maximum bid amount in the bidding form$/) do
 end
 
 Then(/^I should see I have the winning bid$/) do
-  expect(page).to have_content("You are currently the low bidder")
+  @auction.reload
+
+  winning_bid_amount = Currency.new(winning_bid.amount)
+  winning_bid_time = DcTimePresenter.convert_and_format(winning_bid.created_at)
+
+  winning_bid_text = I18n.t(
+    'auctions.show.status.winning_bidder.body',
+    winning_bid_amount: winning_bid_amount,
+    winning_bid_time: winning_bid_time
+  )
+
+  expect(page).to have_content(winning_bid_text)
 end
 
 Then(/^I should see I do not have the winning bid$/) do
@@ -93,4 +104,8 @@ end
 
 def end_date
   DcTimePresenter.convert_and_format(@auction.ended_at)
+end
+
+def winning_bid
+  winning_bid
 end

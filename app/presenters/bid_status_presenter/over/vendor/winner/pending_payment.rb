@@ -6,7 +6,7 @@ class BidStatusPresenter::Over::Vendor::Winner::PendingPayment < BidStatusPresen
   def body
     I18n.t(
       'auctions.show.status.pending_payment.body',
-      amount: winning_amount,
+      amount: winning_bid_amount,
       delivery_url: auction.delivery_url,
       payment_url: user.payment_url
     )

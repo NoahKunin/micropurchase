@@ -17,6 +17,11 @@ en:
           body: "Bidding for this auction closed on %{end_date}."
     show:
       status:
+        winning_bidder:
+          header: 'Bid placed'
+          body: >
+            You placed a bid of %{winning_bid_amount} on %{winning_bid_time}.
+            You are currently the low bidder.
         ready_for_work:
           form_label: 'Pull request URL'
           form_submit: 'Start work'

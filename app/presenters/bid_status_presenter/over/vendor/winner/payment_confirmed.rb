@@ -8,7 +8,7 @@ class BidStatusPresenter::Over::Vendor::Winner::PaymentConfirmed < BidStatusPres
       'auctions.show.status.payment_confirmed.body',
       end_date: end_date,
       accepted_date: accepted_date,
-      amount: winning_amount,
+      amount: winning_bid_amount,
       paid_at: paid_date
     )
   end
