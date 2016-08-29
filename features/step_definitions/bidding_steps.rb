@@ -13,6 +13,14 @@ When(/^I have placed the lowest bid$/) do
   b.update_attribute(:bidder_id, @user.id)
 end
 
+When(/^I submit a bid whose amount is greater than the maximum bid$/) do
+  rules = RulesFactory.new(@auction).create
+  max_bid_amount = rules.max_allowed_bid
+  new_bid_amount = max_bid_amount + 10
+
+  step("I submit a bid for $#{new_bid_amount}")
+end
+
 When(/^I have placed a bid$/) do
   step("I have placed the lowest bid")
 end
@@ -100,6 +108,10 @@ Then(/^I should not see the bid form$/) do
   within('.auction-show') do
     expect(page).not_to have_selector(:css, '.auction-detail-panel form')
   end
+end
+
+When(/^I should see that my bid was rejected$/) do
+  expect(page).to have_content("Bid rejected")
 end
 
 def end_date

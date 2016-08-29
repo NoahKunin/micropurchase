@@ -28,3 +28,12 @@ Feature: Vendor bids on an open auction
     Then I should see "Your bid: $999"
     And I should not see the bid form
     And I should see I have the winning bid
+
+  Scenario: Vendor submits bid over the maximum bid for a reverse auction
+    Given there is an open bidless auction
+    And the auction has a start price of 1000
+    And I am a user with a verified SAM account
+    And I sign in
+    When I visit the auction page
+    And I submit a bid whose amount is greater than the maximum bid
+    And I should see that my bid was rejected

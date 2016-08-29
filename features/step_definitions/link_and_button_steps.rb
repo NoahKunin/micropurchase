@@ -37,6 +37,11 @@ When(/^I click on the update button$/) do
   step("I click on the \"#{update_button}\" button")
 end
 
+When(/^I click on the place bid button$/) do
+  place_bid_button = I18n.t('helpers.submit.bid.create')
+  step("I click on the \"#{place_bid_button}\" button")
+end
+
 When(/^I click on the I'm done button$/) do
   button = I18n.t('auctions.show.status.work_in_progress.action')
   step("I click on the \"#{button}\" button")

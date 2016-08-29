@@ -17,6 +17,10 @@ en:
           body: "Bidding for this auction closed on %{end_date}."
     show:
       status:
+        bid_rejected:
+          header: ''
+          body: >
+            
         winning_bidder:
           header: 'Bid placed'
           body: >
